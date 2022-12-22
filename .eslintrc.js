@@ -1,31 +1,33 @@
 module.exports = {
+  root: true,
   env: {
     browser: true,
     es2021: true,
-    node: true
+    node: true,
+    'vue/setup-compiler-macros': true,
   },
-  extends: ["plugin:vue/vue3-recommended", "airbnb-base", "plugin:prettier/recommended"],
+  // plugins: ['@typescript-eslint'],
+  parser: 'vue-eslint-parser',
   parserOptions: {
-    ecmaVersion: 12,
-    parser: "@typescript-eslint/parser",
-    sourceType: "module"
+    // parser: '@typescript-eslint/parser',
+    sourceType: 'module',
+    ecmaVersion: 2021,
   },
-  plugins: ["vue", "@typescript-eslint"],
+  extends: [
+    'eslint:recommended',
+    // 'plugin:@typescript-eslint/recommended',
+    'plugin:vue/vue3-recommended',
+    // '@vue/typescript/recommended',
+    // '@vue/prettier',
+  ],
+
   rules: {
-    "no-shadow": "off",
-    "prefer-destructuring": "off",
-    "import/no-unresolved": "off",
-    "import/extensions": "off",
-    "import/no-absolute-path": "off",
-    "import/no-extraneous-dependencies": "off",
-    "vue/no-multiple-template-root": "off",
-    "no-param-reassign": [
-      "error",
-      {
-        props: true,
-        ignorePropertyModificationsFor: ["state", "config"]
-      }
-    ]
+    'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
+    'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
+    // 'prettier/prettier': ['warn', {}, { usePrettierrc: true }],
+    // '@typescript-eslint/no-non-null-assertion': 0,
+    // '@typescript-eslint/no-explicit-any': 0, // allow explicit any's because of the legacy code and ts-less deps, but still prohibit IMplicit any's
+    'vue/multi-word-component-names': 0,
+    'vue/no-lone-template': 0,
   },
-  settings: {}
-};
+}

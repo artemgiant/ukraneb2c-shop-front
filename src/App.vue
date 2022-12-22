@@ -1,8 +1,10 @@
 <template>
-  <HeaderNav />
+  <Header />
   <RouterView />
+  <Footer />
 </template>
 
 <script setup>
-  import HeaderNav from "@/components/HeaderNav.vue";
+  import Header from "@/components/Header.vue";
+  import Footer from "@/components/Footer.vue";
 </script>
