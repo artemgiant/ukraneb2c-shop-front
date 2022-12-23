@@ -1,7 +1,8 @@
 import axios, { AxiosInstance } from "axios";
 
 const $axios = axios.create({
-  baseURL: "https://jsonplaceholder.typicode.com"
+  baseURL: import.meta.env.VITE_APP_BACKEND_URL
 });
+
 
 export default $axios;

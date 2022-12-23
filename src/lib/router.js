@@ -1,12 +1,23 @@
 import { createRouter, createWebHistory } from "vue-router";
 
 import Index from "@/pages/Index.vue";
-
+import Example from "@/pages/Example.vue";
+import Store from "@/pages/Store/StorePage.vue"
 const routes = [
   {
     component: Index,
     path: "/",
     name: "index"
+  },
+  {
+    component: Example,
+    path: "/example",
+    name: "example"
+  },
+  {
+    component: Store,
+    path: '/store',
+    name: 'Store'
   }
 
 ];
