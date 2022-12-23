@@ -1,20 +1,21 @@
 import {defineStore} from "pinia"
 import $axios from "@/lib/axios";
 import {useProductStore} from "./ProductStore";
-// import {ref} from "vue";
 
 export const useProductApiStore = defineStore('productApiStore', () => {
 
 
-    const productStore = useProductStore();
-
     const getProducts = async () => {
 
-        $axios.get('/products').then((res)=>{
-            productStore.products = res.data.products;
-        })
+        const productStore = useProductStore();
 
-        console.log('test')
+        $axios.get('/api/products').then((res)=>{
+            console.log(res.data)
+            productStore.products.push(...res.data.products)
+        })  .catch(function (error) {
+            console.log(error);
+            alert(error.message);
+        });
     }
 
     return {

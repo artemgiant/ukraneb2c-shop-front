@@ -1,4 +1,3 @@
-
 import { createApp } from "vue";
 import { createPinia } from "pinia";
 import App from "./App.vue";
@@ -20,8 +19,9 @@ const app = createApp(App)
 ;
 
 // Config
-app.config.productionTip = false;
+app.config.productionTip = true;
 app.config.globalProperties.$backendUrl = import.meta.env.VITE_APP_BACKEND_URL;
+app.config.globalProperties.$storageUrl= import.meta.env.VITE_APP_STORAGE_URL;
 app.config.globalProperties.$appName = import.meta.env.VITE_APP_NAME;
 
 app.mount("#app");
