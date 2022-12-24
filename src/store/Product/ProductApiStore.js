@@ -8,10 +8,12 @@ export const useProductApiStore = defineStore('productApiStore', () => {
     const getProducts = async () => {
 
         const productStore = useProductStore();
+        const start = (productStore.page - 1) * productStore.length;
 
-        $axios.get('/api/products').then((res)=>{
-            console.log(res.data)
+      await  $axios.get(`/api/products?start=${start}&length=${productStore.length}`).then((res)=>{
+          productStore.products = [];
             productStore.products.push(...res.data.products)
+            productStore.total = res.data.totalLength;
         })  .catch(function (error) {
             console.log(error);
             alert(error.message);

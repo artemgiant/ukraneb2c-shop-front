@@ -244,9 +244,10 @@
 
                             <label>
                                 Show:
-                                <select class="input-select">
-                                    <option value="0">20</option>
-                                    <option value="1">50</option>
+                                <select @change="productStore.length = $event.target.value" class="input-select">
+                                    <option value="10">10</option>
+                                    <option value="20">20</option>
+                                    <option value="50">50</option>
                                 </select>
                             </label>
                         </div>
@@ -261,7 +262,7 @@
                     <div class="row">
                         <!-- product -->
                         <card
-                                v-for="product in products"
+                                v-for="product in productStore.products"
                                 :key="product.id"
                                 :product="product"
                         />
@@ -272,13 +273,18 @@
 
                     <!-- store bottom filter -->
                     <div class="store-filter clearfix">
-                        <span class="store-qty">Showing 20-100 products</span>
+                        <span class="store-qty">Showing {{startIndex}}-{{endIndex}} products {{productStore.total}}</span>
                         <ul class="store-pagination">
-                            <li class="active">1</li>
-                            <li><a href="#">2</a></li>
-                            <li><a href="#">3</a></li>
-                            <li><a href="#">4</a></li>
-                            <li><a href="#"><i class="fa fa-angle-right"></i></a></li>
+                            <li v-if:="previousPage" v-on:click="productStore.page = previousPage"><a ><i class="fa fa-angle-left"></i></a></li>
+                            <li
+                                    v-for="(inx) in maxPage"
+                                    v-on:click="productStore.page =  inx"
+                                    :key="inx"
+                                    :class="{active:inx===productStore.page}">
+                                {{inx}}
+                            </li>
+
+                            <li v-if:="maxPage > nextPage" v-on:click="productStore.page = nextPage"><a ><i class="fa fa-angle-right"></i></a></li>
                         </ul>
                     </div>
                     <!-- /store bottom filter -->
