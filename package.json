@@ -1,5 +1,5 @@
 {
-  "name": "vue3-vite-template",
+  "name": "ukraineb2b-shop",
   "version": "0.0.1",
   "private": false,
   "description": "A Vite2.x + Vue3 + TypeScript template starter",
@@ -16,6 +16,7 @@
     "axios": "^0.21.1",
     "pinia": "^2.0.23",
     "vue": "^3.2.6",
+    "vue-multiselect": "^3.0.0-alpha.2",
     "vue-router": "^4.0.11"
   },
   "devDependencies": {

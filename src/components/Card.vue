@@ -19,18 +19,18 @@
         </div>
         <div class="product-btns">
           <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
-          <button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button>
+<!--          <button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button>-->
           <button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
         </div>
       </div>
       <div class="add-to-cart">
-        <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
+        <button class="add-to-cart-btn" v-on:click="add(product)"><i class="fa fa-shopping-cart"></i> add to cart</button>
       </div>
     </div>
   </div>
 </template>
 
-<script>
+<script >
 
 export default {
   name: "Card",
@@ -40,6 +40,15 @@ export default {
       required: true,
       default: () => {},
     },
+  },
+  emits:[
+    'basket-add-product'
+  ],
+  methods: {
+    add(){
+      console.log(this.product)
+      this.$emit('basket-add-product',this.product)
+    }
   }
 }
 </script>

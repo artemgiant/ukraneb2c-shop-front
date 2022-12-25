@@ -8,12 +8,20 @@
      const total  = ref(0);
      const length = ref(10);
      const page  = ref(1);
+     // Searching
+     const filter = ref({
+         category:null,
+         brand: null,
+         search:null,
+         price:{from:null,to:null}
+     },'deep')
 
-     watch(page, (page, prevPage) => {
+     watch(page, () => {
          useProductApiStore().getProducts();
      })
 
-     watch(length, (page, prevPage) => {
+     watch(length, () => {
+         page.value = 1;
          useProductApiStore().getProducts();
      })
 
@@ -22,7 +30,8 @@
          products,
          total,
          length,
-         page
+         page,
+         filter
      }
 
  })

@@ -3,6 +3,8 @@ import { createRouter, createWebHistory } from "vue-router";
 import Index from "@/pages/Index.vue";
 import Example from "@/pages/Example.vue";
 import Store from "@/pages/Store/StorePage.vue"
+import Basket from "@/pages/Basket/BasketPage.vue"
+
 const routes = [
   {
     component: Index,
@@ -18,6 +20,11 @@ const routes = [
     component: Store,
     path: '/store',
     name: 'Store'
+  },
+  {
+    component: Basket,
+    path: '/basket',
+    name: 'Basket'
   }
 
 ];
