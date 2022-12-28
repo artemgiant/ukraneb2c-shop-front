@@ -15,80 +15,253 @@
 
                         <div class="row">
                             <div class="col-md-4 form-group" >
-                                <input class="input" type="text" name="last-name" placeholder="Прізвище">
+                                <input class="input" type="text" v-model="form.recipient.last_name" name="last_name" placeholder="Прізвище">
                             </div>
                             <div class="col-md-4 form-group" >
-                                <input class="input" type="text" name="last-name" placeholder="Ім'я">
+                                <input class="input" type="text"  v-model="form.recipient.first_name" name="first_name" placeholder="Ім'я">
                             </div>
                             <div class="col-md-4 form-group" >
-                                <input class="input" type="text" name="last-name" placeholder="По батькові">
+                                <input class="input" type="text"  v-model="form.recipient.middle_name" name="middle_name" placeholder="По батькові">
                             </div>
                         </div>
 
 
                         <div class="row">
                             <div class="col-md-6 form-group" >
-                                <input class="input" type="text" name="last-name" placeholder="Email">
+                                <input class="input" type="email"
+                                       v-model="form.recipient.email"
+                                       name="last-name" placeholder="Email">
                             </div>
                             <div class="col-md-6 form-group" >
-                                <input class="input" type="text" name="last-name" placeholder="Номер телефона">
+                                <input class="input" type="tel"
+                                       v-model="form.recipient.phone"
+                                       name="phone" placeholder="Номер телефона">
                             </div>
                         </div>
 
-                        <div class="form-group">
-                        <VueMultiselect
-                                v-model="selected"
-                                :options="options">
-                        </VueMultiselect>
-</div>
+
 
                         <div class="form-group">
-                            <label class="typo__label" for="ajax">Async multiselect</label>
 
                             <VueMultiselect
-                                    v-model="selectedCountries"
+                                    v-model="form.recipient.city"
                                     id="ajax"
-                                    label="name"
-                                    track-by="code"
-                                    placeholder="Type to search"
+                                    label="text"
+                                    track-by="id"
+                                    placeholder="Searching cities!"
                                     open-direction="bottom"
-                                    :options="countries"
-                                    :multiple="true"
+                                    :options="addressStore.citiesRecipient"
                                     :searchable="true"
-                                    :loading="isLoading"
                                     :internal-search="false"
-                                    :clear-on-select="false"
-                                    :close-on-select="false"
+                                    :clear-on-select="true"
+                                    :close-on-select="true"
                                     :options-limit="300"
                                     :limit="3"
-                                    :limit-text="limitText"
                                     :max-height="600"
                                     :show-no-results="false"
-                                    :hide-selected="true"
-                                    @search-change="asyncFind">
+                                    @search-change="searchRecipientCity"
+                                    @select="selectedRecipientCity"
+                            >
+
+
+                            </VueMultiselect>
+                        </div>
+
+                        <div class="form-group">
+
+                            <VueMultiselect
+                                    v-model="form.recipient.street"
+                                    id="ajax"
+                                    label="text"
+                                    track-by="id"
+                                    placeholder="Searching cities!"
+                                    open-direction="bottom"
+                                    :options="addressStore.streets"
+                                    :searchable="true"
+                                    :internal-search="false"
+                                    :clear-on-select="true"
+                                    :close-on-select="true"
+                                    :options-limit="300"
+                                    :limit="3"
+                                    :max-height="600"
+                                    :show-no-results="false"
+                            >
+
 
                             </VueMultiselect>
                         </div>
 
 
-
-                        <div class="form-group">
-                            <input class="input" type="text" name="address" placeholder="Address">
-                        </div>
-                        <div class="form-group">
-                            <input class="input" type="text" name="city" placeholder="City">
-                        </div>
-                        <div class="form-group">
-                            <input class="input" type="text" name="country" placeholder="Country">
-                        </div>
-                        <div class="form-group">
-                            <input class="input" type="text" name="zip-code" placeholder="ZIP Code">
-                        </div>
-                        <div class="form-group">
-                            <input class="input" type="tel" name="tel" placeholder="Telephone">
+                        <div class="row">
+                            <div class="col-md-6 form-group" >
+                                <input class="input" type="text"
+                                       v-model="form.recipient.house"
+                                       name="house" placeholder="House">
+                            </div>
+                            <div class="col-md-6 form-group" >
+                                <input class="input" type="text"
+                                       v-model="form.recipient.flat"
+                                       name="flat" placeholder="Flat">
+                            </div>
                         </div>
                     </div>
                     <!-- /Billing Details -->
+
+
+
+                    <!-- Delivery Address -->
+                    <div class="billing-details">
+                        <div class="section-title">
+                            <h3 class="title">Delivery Address</h3>
+                        </div>
+
+
+                        <ul class="body-right-list form-group">
+                            <li>
+                                <label for="dp-courier" class="tabs-title" :class="{active:form.delivery_address.delivery_type === 'meest_courier'}">
+                                    <i class="icon-courier-off"></i>
+                                    <i class="icon-courier-on"></i>
+                                    <span>Курьер</span>
+
+
+                                    <input
+                                            style="display: none"
+                                            name="address_delivery_type"
+                                            type="radio"
+                                            v-model="form.delivery_address.delivery_type"
+                                            id="dp-courier"
+                                            value="meest_courier">
+                                </label>
+
+                            </li>
+                            <li >
+                                <label
+                                        for="dp-nova_poshta"
+                                        class="tabs-title"
+                                        :class="{active:form.delivery_address.delivery_type === 'nova_poshta'}">
+                                    <i class="icon-NP-off"></i>
+                                    <i class="icon-NP-on"></i>
+                                    <span>Нова почта</span>
+
+                                    <input
+                                            style="display: none"
+                                            name="address_delivery_type"
+                                            type="radio"
+                                            v-model="form.delivery_address.delivery_type"
+                                            id="dp-nova_poshta"
+                                            value="nova_poshta">
+
+                                </label>
+                            </li>
+
+                            <li class="tabs-title tabs-title-click-off">
+                                <i class="icon-UK-off"></i>
+                                <i class="icon-UK-on"></i>
+                                <span>
+										Укрпочта
+									</span>
+                            </li>
+
+                            <li>
+
+                                <label
+                                        for="dp-meest_apt"
+                                        class="tabs-title"
+                                        :class="{active:form.delivery_address.delivery_type === 'meest_apt'}">
+
+                                    <i class="icon-ATP-off"></i>
+                                    <i class="icon-ATP-on"></i>
+                                    <span>АПТ</span>
+                                    <input
+                                            style="display: none"
+                                            name="address_delivery_type"
+                                            type="radio"
+                                            v-model="form.delivery_address.delivery_type"
+                                            id="dp-meest_apt"
+                                            value="meest_apt">
+                                </label>
+                            </li>
+                            <li >
+
+                                <label
+                                        for="dp-meest_point"
+                                        class="tabs-title"
+                                        :class="{active:form.delivery_address.delivery_type === 'meest_point'}"
+                                >
+                                    <i class="icon-MP-off"></i>
+                                    <i class="icon-MP-on"></i>
+                                    <span>Meest Point</span>
+                                    <input
+                                            style="display: none"
+                                            name="address_delivery_type"
+                                            type="radio"
+                                            v-model="form.delivery_address.delivery_type"
+                                            id="dp-meest_point"
+                                            value="meest_point"
+                                    >
+                                </label>
+                            </li>
+                        </ul>
+
+                        <div
+                                v-if:="['nova_poshta','meest_point','meest_apt'].includes(form.delivery_address.delivery_type)"
+                                class="form-group">
+
+                            <VueMultiselect
+                                    v-model="form.delivery_address.city"
+                                    id="ajax"
+                                    label="text"
+                                    track-by="id"
+                                    placeholder="Searching cities!"
+                                    open-direction="bottom"
+                                    :options="addressStore.cities"
+                                    :searchable="true"
+                                    :internal-search="false"
+                                    :clear-on-select="true"
+                                    :close-on-select="true"
+                                    :options-limit="300"
+                                    :limit="3"
+                                    :max-height="600"
+                                    :show-no-results="false"
+
+                                    @search-change="searchChangeCity"
+                                    @select="asyncWarehouses"
+                            >
+
+
+                            </VueMultiselect>
+                        </div>
+
+                        <div
+                                v-if:="['nova_poshta','meest_point','meest_apt'].includes(form.delivery_address.delivery_type)"
+                                class="form-group">
+
+                            <VueMultiselect
+                                    v-model="form.delivery_address.warehouse"
+                                    id="warehouse"
+                                    label="text"
+                                    track-by="id"
+                                    placeholder="Searching warehouse!"
+                                    open-direction="bottom"
+                                    :options="addressStore.warehouses"
+                                    :searchable="true"
+                                    :internal-search="false"
+                                    :clear-on-select="false"
+                                    :close-on-select="true"
+                                    :options-limit="300"
+                                    :limit="3"
+                                    :max-height="600"
+                                    :show-no-results="false"
+                                    @search-change="searchWarehouses"
+
+                            >
+
+                            </VueMultiselect>
+                        </div>
+
+
+                    </div>
+                    <!-- /Delivery Address -->
 
                     <!-- Order notes -->
                     <div class="order-notes">
