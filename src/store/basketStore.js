@@ -30,6 +30,9 @@ export const useBasketStore = defineStore('basketStore', ()=>{
         }, 0)
     })
 
+
+
+
     return {products,
     delFromBasket,count,sum}
 })

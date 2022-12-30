@@ -118,7 +118,7 @@
 
                         <ul class="body-right-list form-group">
                             <li>
-                                <label for="dp-courier" class="tabs-title" :class="{active:form.delivery_address.delivery_type === 'meest_courier'}">
+                                <label for="dp-courier" class="tabs-title" :class="{active:form.address_delivery.delivery_type === 'meest_courier'}">
                                     <i class="icon-courier-off"></i>
                                     <i class="icon-courier-on"></i>
                                     <span>Курьер</span>
@@ -128,7 +128,7 @@
                                             style="display: none"
                                             name="address_delivery_type"
                                             type="radio"
-                                            v-model="form.delivery_address.delivery_type"
+                                            v-model="form.address_delivery.delivery_type"
                                             id="dp-courier"
                                             value="meest_courier">
                                 </label>
@@ -138,7 +138,7 @@
                                 <label
                                         for="dp-nova_poshta"
                                         class="tabs-title"
-                                        :class="{active:form.delivery_address.delivery_type === 'nova_poshta'}">
+                                        :class="{active:form.address_delivery.delivery_type === 'nova_poshta'}">
                                     <i class="icon-NP-off"></i>
                                     <i class="icon-NP-on"></i>
                                     <span>Нова почта</span>
@@ -147,7 +147,7 @@
                                             style="display: none"
                                             name="address_delivery_type"
                                             type="radio"
-                                            v-model="form.delivery_address.delivery_type"
+                                            v-model="form.address_delivery.delivery_type"
                                             id="dp-nova_poshta"
                                             value="nova_poshta">
 
@@ -167,7 +167,7 @@
                                 <label
                                         for="dp-meest_apt"
                                         class="tabs-title"
-                                        :class="{active:form.delivery_address.delivery_type === 'meest_apt'}">
+                                        :class="{active:form.address_delivery.delivery_type === 'meest_apt'}">
 
                                     <i class="icon-ATP-off"></i>
                                     <i class="icon-ATP-on"></i>
@@ -176,7 +176,7 @@
                                             style="display: none"
                                             name="address_delivery_type"
                                             type="radio"
-                                            v-model="form.delivery_address.delivery_type"
+                                            v-model="form.address_delivery.delivery_type"
                                             id="dp-meest_apt"
                                             value="meest_apt">
                                 </label>
@@ -186,7 +186,7 @@
                                 <label
                                         for="dp-meest_point"
                                         class="tabs-title"
-                                        :class="{active:form.delivery_address.delivery_type === 'meest_point'}"
+                                        :class="{active:form.address_delivery.delivery_type === 'meest_point'}"
                                 >
                                     <i class="icon-MP-off"></i>
                                     <i class="icon-MP-on"></i>
@@ -195,7 +195,7 @@
                                             style="display: none"
                                             name="address_delivery_type"
                                             type="radio"
-                                            v-model="form.delivery_address.delivery_type"
+                                            v-model="form.address_delivery.delivery_type"
                                             id="dp-meest_point"
                                             value="meest_point"
                                     >
@@ -204,11 +204,11 @@
                         </ul>
 
                         <div
-                                v-if:="['nova_poshta','meest_point','meest_apt'].includes(form.delivery_address.delivery_type)"
+                                v-if:="['nova_poshta','meest_point','meest_apt'].includes(form.address_delivery.delivery_type)"
                                 class="form-group">
 
                             <VueMultiselect
-                                    v-model="form.delivery_address.city"
+                                    v-model="form.address_delivery.city"
                                     id="ajax"
                                     label="text"
                                     track-by="id"
@@ -233,11 +233,11 @@
                         </div>
 
                         <div
-                                v-if:="['nova_poshta','meest_point','meest_apt'].includes(form.delivery_address.delivery_type)"
+                                v-if:="['nova_poshta','meest_point','meest_apt'].includes(form.address_delivery.delivery_type)"
                                 class="form-group">
 
                             <VueMultiselect
-                                    v-model="form.delivery_address.warehouse"
+                                    v-model="form.address_delivery.warehouse"
                                     id="warehouse"
                                     label="text"
                                     track-by="id"
@@ -326,17 +326,13 @@
                         </div>
                     </div>
                     <div class="input-checkbox">
-                        <input type="checkbox" id="terms">
+                        <input type="checkbox" v-model="isAgree" id="terms">
                         <label for="terms">
                             <span></span>
                             I've read and accept the <a href="#">terms & conditions</a>
                         </label>
                     </div>
-                    <a href="#" class="primary-btn order-submit">Place order</a>
-
-
-
-
+                    <button  v-on:click="placeOrder"  style="width: 100%"  class="primary-btn order-submit">Place order</button>
 
 
                 </div>
