@@ -10,7 +10,7 @@
                     <!-- Billing Details -->
                     <div class="billing-details">
                         <div class="section-title">
-                            <h3 class="title">Billing address</h3>
+                            <h3 class="title">Recipient</h3>
                         </div>
 
                         <div class="row">
@@ -48,7 +48,7 @@
                                     id="ajax"
                                     label="text"
                                     track-by="id"
-                                    placeholder="Searching cities!"
+                                    placeholder="Місто"
                                     open-direction="bottom"
                                     :options="addressStore.citiesRecipient"
                                     :searchable="true"
@@ -74,7 +74,7 @@
                                     id="ajax"
                                     label="text"
                                     track-by="id"
-                                    placeholder="Searching cities!"
+                                    placeholder="Вулиця"
                                     open-direction="bottom"
                                     :options="addressStore.streets"
                                     :searchable="true"
@@ -96,12 +96,12 @@
                             <div class="col-md-6 form-group" >
                                 <input class="input" type="text"
                                        v-model="form.recipient.house"
-                                       name="house" placeholder="House">
+                                       name="house" placeholder="Номер будинку">
                             </div>
                             <div class="col-md-6 form-group" >
                                 <input class="input" type="text"
                                        v-model="form.recipient.flat"
-                                       name="flat" placeholder="Flat">
+                                       name="flat" placeholder="Номер квартири">
                             </div>
                         </div>
                     </div>
@@ -212,7 +212,7 @@
                                     id="ajax"
                                     label="text"
                                     track-by="id"
-                                    placeholder="Searching cities!"
+                                    placeholder="Місто"
                                     open-direction="bottom"
                                     :options="addressStore.cities"
                                     :searchable="true"
@@ -241,9 +241,9 @@
                                     id="warehouse"
                                     label="text"
                                     track-by="id"
-                                    placeholder="Searching warehouse!"
+                                    placeholder="Відділення"
                                     open-direction="bottom"
-                                    :options="addressStore.warehouses"
+                                    :options="addressStore.filteredWarehouses"
                                     :searchable="true"
                                     :internal-search="false"
                                     :clear-on-select="false"
@@ -252,7 +252,7 @@
                                     :limit="3"
                                     :max-height="600"
                                     :show-no-results="false"
-                                    @search-change="searchWarehouses"
+                                    @search-change="addressStore.searchWarehouses"
 
                             >
 
@@ -265,7 +265,7 @@
 
                     <!-- Order notes -->
                     <div class="order-notes">
-                        <textarea class="input" placeholder="Order Notes"></textarea>
+                        <textarea class="input" placeholder="Примітки до замовлення"></textarea>
                     </div>
                     <!-- /Order notes -->
                 </div>
@@ -277,7 +277,7 @@
                     </div>
                     <div class="order-summary">
                         <div class="order-col">
-                            <div><strong>PRODUCT</strong></div>
+                            <div><strong>PRODUCTS</strong></div>
                             <div><strong>TOTAL</strong></div>
                         </div>
                         <div class="order-products">
@@ -332,7 +332,7 @@
                             I've read and accept the <a href="#">terms & conditions</a>
                         </label>
                     </div>
-                    <button  v-on:click="placeOrder"  style="width: 100%"  class="primary-btn order-submit">Place order</button>
+                    <button :disabled="!isAgree"  v-on:click="placeOrder"  style="width: 100%"  class="primary-btn order-submit">Place order</button>
 
 
                 </div>

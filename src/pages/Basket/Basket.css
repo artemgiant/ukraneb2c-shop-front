@@ -74,7 +74,7 @@
     padding: 4px;
     border: 1px solid #f3f3f4;
     box-sizing: border-box;
-    border-radius: 12px;
+    border-radius: 5px;
     width: 100%;
 }
 .body-right-list .tabs-title {
@@ -214,4 +214,8 @@
     line-height: 24px;
     color: #000;
     margin: 0;
+}
+
+.form-group input{
+    border-radius: 5px;
 }

@@ -4,7 +4,7 @@
 
 <script setup>
 import VueMultiselect from 'vue-multiselect'
-import {ref} from 'vue'
+import {computed, ref} from 'vue'
 import $axios from "@/lib/axios";
 
 
@@ -16,7 +16,7 @@ const basketStore = useBasketStore();
 const addressApiStore = useAddressApiStore();
 const addressStore = useAddressStore();
 
-const isAgree = ref(true);
+const isAgree = ref(false);
 
 const form = ref({
   recipient:{
@@ -31,7 +31,7 @@ const form = ref({
     flat:null,
   },
   address_delivery:{
-    delivery_type:null,
+    delivery_type:'nova_poshta',
     city:null,
     warehouse:null,
   },
@@ -61,22 +61,56 @@ const asyncWarehouses = (object) => {
   addressApiStore.getWarehouses(form.value.address_delivery.delivery_type, object.id);
 }
 
-const  searchWarehouses = (q) =>{
-      addressStore.warehouse_number
+const queryWarehouse = ref('');
+
+const searchWarehouses = (q) => {
+  queryWarehouse.value = q;
+  addressStore.warehouse_number
 
 // если в строке есть только цифры
-  if(parseInt(q).toString().length === q.length){
-    addressStore.warehouses =  addressStore.warehouses.filter((w)=>parseInt(w.warehouse_number) === parseInt(q))
+  if (parseInt(q).toString().length === q.length) {
+    addressStore.warehouses = addressStore.warehouses.filter((w) => parseInt(w.warehouse_number) === parseInt(q))
   }
 
 }
 
+const filteredWarehouses = computed(() => {
 
-const placeOrder = async ()  => {
+  return addressStore.warehouses;
+  // addressStore.warehouses.filter(warehouse => warehouse.text.includes(queryWarehouse.value))
+})
+
+// () {
+//     return  this.tickers.filter(ticker => ticker.name.includes(this.filter));
+// },
+
+const placeOrder = async () => {
   const url = `api/orders/create`;
 
   await $axios.post(url, form.value).then((res) => {
-      console.log(res);
+    console.log(res);
+
+    // basketStore.products.value = {};
+
+    form.value = {
+      recipient: {
+        phone: null,
+        email: null,
+        first_name: null,
+        last_name: null,
+        middle_name: null,
+        city: null,
+        street: null,
+        house: null,
+        flat: null,
+      },
+      address_delivery: {
+        delivery_type: null,
+        city: null,
+        warehouse: null,
+      },
+      products: basketStore.products
+    };
 
   }).catch(function (error) {
     console.log(error);

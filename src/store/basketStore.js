@@ -3,13 +3,15 @@ import {ref, watch, computed} from "vue";
 
 export const useBasketStore = defineStore('basketStore', ()=>{
     const products = ref([]);
+
     const productsData = localStorage.getItem("basket:products");
 
-    if (productsData)
+    if (productsData && Object.keys(JSON.parse(productsData)).length)
         products.value = JSON.parse(productsData);
 
     watch(products, () => {
         console.log('change products')
+
         localStorage.setItem("basket:products", JSON.stringify(products.value));
     },{ deep: true })
 
