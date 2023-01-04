@@ -5,14 +5,18 @@
 <script setup>
 import {computed, ref} from 'vue'
 import $axios from "@/lib/axios";
+
+import * as Yup from 'yup';
+import {phoneMask} from "@/lib/phone-mask";
+
 import VueMultiselect from 'vue-multiselect'
 import { Form, Field, ErrorMessage } from 'vee-validate';
-import * as Yup from 'yup';
-import { useIMask } from 'vue-imask';
 
+// STORE
 import {useBasketStore} from "@/store/basketStore"
 import {useAddressApiStore} from "@/store/Address/AddressApiStore";
 import {useAddressStore} from "@/store/Address/AddressStore";
+
 // Components
 const basketStore = useBasketStore();
 const addressApiStore = useAddressApiStore();
@@ -41,7 +45,6 @@ const form = ref({
 }, {deep: true})
 
 const searchRecipientCity = (query)=> {
-
     addressApiStore.getCity(query,'meest_courier');
 }
 
@@ -79,68 +82,12 @@ const placeOrder = async () => {
   await $axios.post(url, form.value).then((res) => {
     console.log(res);
     // basketStore.products.value = {};
-    form.value = {
-      recipient: {
-        phone: null,
-        email: null,
-        first_name: null,
-        last_name: null,
-        middle_name: null,
-        city: null,
-        street: null,
-        house: null,
-        flat: null,
-      },
-      address_delivery: {
-        delivery_type: null,
-        city: null,
-        warehouse: null,
-      },
-      products: basketStore.products
-    };
 
   }).catch(function (error) {
     console.log(error);
     alert(error.message);
   });
 }
-
-const { el, masked } = useIMask({
-  mask: "+38(000)000-00-00",
-  lazy: false
-});
-
-// const schema = Yup.object().shape({
-//   phone: Yup.string()
-//       .required('Phone is required').min(8).nullable(),
-//   last_name: Yup.string()
-//       .required('Last name is required').nullable(),
-//   recipient:{
-//     last_name: Yup.string()
-//         .required('Last name is required').nullable()
-//   }
-//
-// });
-
-
-
-// const form = ref({
-//   recipient:{
-//     phone:null,
-//     email:null,
-//     first_name:null,
-//     last_name:null,
-//     middle_name:null,
-//     city:null,
-//     street:null,
-//     house:null,
-//     flat:null,
-//   },
-//   address_delivery:{
-//     delivery_type:'nova_poshta',
-//     city:null,
-//     warehouse:null,
-//   },
 
 
 const schema = Yup.object().shape({
@@ -149,7 +96,7 @@ const schema = Yup.object().shape({
             first_name: Yup.string().required().min(3).nullable(),
             last_name: Yup.string().required().min(3).nullable(),
             middle_name: Yup.string().required().min(3).nullable(),
-            // phone: Yup.string().required().nullable(),
+            phone: Yup.string().required().nullable(),
             email: Yup.string().email().required().nullable(),
             city: Yup.object().required().nullable(),
             street: Yup.object().required().nullable(),
@@ -157,23 +104,47 @@ const schema = Yup.object().shape({
             house: Yup.string().required().nullable(),
           })
       .strict(),
-
   address_delivery: Yup.object().shape({
     delivery_type: Yup.string().required().nullable(),
 
   })
       .strict(),
-
 });
-
-
 
 
 function onSubmit(values) {
   // display form values on success
   alert('SUCCESS!! :-)\n\n' + JSON.stringify(values, null, 4));
+
+  basketStore.products.value = {};
+  form.value = {
+    recipient: {
+      phone: null,
+      email: null,
+      first_name: null,
+      last_name: null,
+      middle_name: null,
+      city: null,
+      street: null,
+      house: null,
+      flat: null,
+    },
+    address_delivery: {
+      delivery_type: null,
+      city: null,
+      warehouse: null,
+    },
+    products: basketStore.products
+  };
 }
 
+
+// DIRECTIVES
+const vPhoneMask = {
+  // beforeMount: (el) => focus
+  beforeMount: phoneMask
+
+}
 
 
 

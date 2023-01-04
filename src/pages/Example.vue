@@ -1,80 +1,71 @@
 <template>
-  <Form @submit="onSubmit" :validation-schema="schema">
-    <label for="email">Your Email</label>
-    <Field id="email_addr" name="email_addr" type="email" />
-    <ErrorMessage name="email_addr" />
-
-    <label for="password">Your Password</label>
-    <Field id="password" name="acc_pazzword" type="password" />
-    <ErrorMessage name="acc_pazzword" />
-
-    <button>Submit</button>
-  </Form>
+  <input type="text"  ref="input" v-mask="'+38(0__)-___-__-__'">
+  {{phone}}
 </template>
 
-<script setup lang="ts">
-import { Field, Form, ErrorMessage } from 'vee-validate';
-import * as Yup from 'yup';
+<script setup>
+import  {ref} from 'vue'
+import {phoneMask} from "@/lib/phone-mask";
 
-const schema = Yup.object().shape({
-  email_addr: Yup.string().email().required().label('Email Address'),
-  acc_pazzword: Yup.string().min(5).required().label('Your Password'),
-});
+const phone = ref('');
 
-function onSubmit(values) {
-  alert(JSON.stringify(values, null, 2));
-
-
-
-
-
-  let schema = Yup.object().shape({
-    name: Yup.string().required(),
-    age: Yup.number().required().positive().integer(),
-    email: Yup.string().email(),
-    website: Yup.string().url(),
-    createdOn: Yup.date().default(function () {
-      return new Date();
-    }),
-  });
-
-// check validity
-  schema
-      .isValid({
-        name: 'jimmy',
-        age: 24,
-      })
-      .then(function (valid) {
-        console.log(valid)
-        valid; // => true
-      });
-
-
-  schema.validate
-
-// you can try and type cast objects to the defined schema
-  schema.cast({
-    name: 'jimmy',
-    age: '24',
-    createdOn: '2014-09-23T19:25:25Z',
-  });
-// => { name: 'jimmy', age: 24, createdOn: Date }
+const vMask = {
+  // beforeMount: (el) => focus
+  mounted: phoneMask
 
 }
 </script>
 
 <style scoped>
-input,
-label {
-  display: block;
-  margin-top: 20px;
+
+body {
+  margin: 0;
 }
 
-input + span {
-  display: block;
+* {
+  box-sizing: border-box;
+}
+
+#app {
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Inter', sans-serif;
+  background: #87ccad;
+}
+
+input {
+  height: 46px;
+  font-size: 16px;
+  padding: 0 16px;
+  font-family: 'Inter', sans-serif;
+  border: none;
+  font-weight: 500;
+  outline: none;
+  width: 230px;
+  border-radius: 2px;
 }
 
 button {
-  margin-top: 20px;
+  margin-top: 12px;
+  height: 46px;
+  border-radius: 2px;
+  padding: 0 24px;
+  width: 230px;
+  border: none;
+  background: #000;
+  color: #fff;
+  text-transform: uppercase;
+  font-family: 'Inter', sans-serif;
+  cursor: pointer;
+  outline: none;
+  transition: 0.2s;
+}
+
+button:hover {
+  background: #222;
 }
 </style>

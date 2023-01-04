@@ -77,21 +77,18 @@
 
 <!-- PHONE                           -->
                             <div class="col-md-6 form-group" >
-<!--                                <Field v-slot="{ field }"-->
-<!--                                       placeholder="+38(___)___-__-__"-->
-<!--                                       v-model="form.recipient.phone"-->
-<!--                                       name="recipient.phone"-->
-<!--                                >-->
-                                    <input
-                                            ref="el"
-                                           class="input form-control"
-                                           name="recipient.phone"
-                                    >
+                                <Field
+                                        class="form-control input"
+                                        :class="{ 'is-invalid': errors['recipient.phone'] }"
+                                       placeholder="+38(___)___-__-__"
+                                       v-phone-mask="'+38(___)___-__-__'"
+                                       v-model.lazy="form.recipient.phone"
+                                       name="recipient.phone"
+                                />
 
-<!--                                    <div class="invalid-feedback">-->
-<!--                                        <ErrorMessage name="recipient.phone" />-->
-<!--                                    </div>-->
-<!--                                </Field>-->
+                                    <div class="invalid-feedback">
+                                        <ErrorMessage name="recipient.phone" />
+                                    </div>
                             </div>
                         </div>
 
