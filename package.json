@@ -15,9 +15,12 @@
   "dependencies": {
     "axios": "^0.21.1",
     "pinia": "^2.0.23",
+    "vee-validate": "^4.7.3",
     "vue": "^3.2.6",
+    "vue-imask": "6.4.2",
     "vue-multiselect": "^3.0.0-alpha.2",
-    "vue-router": "^4.0.11"
+    "vue-router": "^4.0.11",
+    "yup": "^0.32.11"
   },
   "devDependencies": {
     "@types/node": "^16.9.1",
@@ -31,6 +34,7 @@
     "eslint-plugin-import": "^2.22.1",
     "eslint-plugin-prettier": "^3.3.1",
     "eslint-plugin-vue": "^7.8.0",
+    "lodash": "^4.17.19",
     "prettier": "^2.2.1",
     "sass": "^1.39.2",
     "typescript": "^4.1.3",

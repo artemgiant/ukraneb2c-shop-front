@@ -7,6 +7,7 @@
             <div class="row">
 
                 <div class="col-md-7">
+                    <Form @submit="onSubmit" id="form-basket" :validation-schema="schema" v-slot="{ errors }">
                     <!-- Billing Details -->
                     <div class="billing-details">
                         <div class="section-title">
@@ -15,93 +16,180 @@
 
                         <div class="row">
                             <div class="col-md-4 form-group" >
-                                <input class="input" type="text" v-model="form.recipient.last_name" name="last_name" placeholder="Прізвище">
+
+<!--LAST NAME-->
+                                <Field
+                                        class="input form-control"
+                                        :class="{ 'is-invalid': errors['recipient.last_name'] }"
+                                        type="text"
+                                        v-model="form.recipient.last_name"
+                                        name="recipient.last_name" placeholder="Прізвище" />
+
+                                <div class="invalid-feedback">
+                                    <ErrorMessage name="recipient.last_name" />
+                                </div>
+
                             </div>
+
+<!-- FIRST NAME                           -->
                             <div class="col-md-4 form-group" >
-                                <input class="input" type="text"  v-model="form.recipient.first_name" name="first_name" placeholder="Ім'я">
+                                <Field
+                                        :class="{ 'is-invalid': errors['recipient.first_name'] }"
+                                        class="input form-control"
+                                        type="text"
+                                        v-model="form.recipient.first_name"
+                                        name="recipient.first_name"
+                                        placeholder="Ім'я"/>
+                                <div class="invalid-feedback">
+                                    <ErrorMessage name="recipient.first_name" />
+                                </div>
                             </div>
+
+<!-- MEDDLE NAME                           -->
                             <div class="col-md-4 form-group" >
-                                <input class="input" type="text"  v-model="form.recipient.middle_name" name="middle_name" placeholder="По батькові">
+                                <Field
+                                        class="input form-control"
+                                        :class="{ 'is-invalid': errors['recipient.middle_name'] }"
+                                        type="text"
+                                        v-model="form.recipient.middle_name"
+                                        name="recipient.middle_name"
+                                        placeholder="По батькові"/>
+                                <div class="invalid-feedback">
+                                    <ErrorMessage name="recipient.middle_name" />
+                                </div>
                             </div>
                         </div>
 
-
+<!--EMAIL-->
                         <div class="row">
                             <div class="col-md-6 form-group" >
-                                <input class="input" type="email"
+                                <Field
+                                       class="input form-control"
+                                       :class="{ 'is-invalid': errors['recipient.email'] }"
+                                       type="email"
                                        v-model="form.recipient.email"
-                                       name="last-name" placeholder="Email">
+                                       name="recipient.email"
+                                        placeholder="Email"/>
+                                <div class="invalid-feedback">
+                                    <ErrorMessage name="recipient.email" />
+                                </div>
                             </div>
+
+<!-- PHONE                           -->
                             <div class="col-md-6 form-group" >
-                                <input class="input" type="tel"
-                                       v-model="form.recipient.phone"
-                                       name="phone" placeholder="Номер телефона">
+<!--                                <Field v-slot="{ field }"-->
+<!--                                       placeholder="+38(___)___-__-__"-->
+<!--                                       v-model="form.recipient.phone"-->
+<!--                                       name="recipient.phone"-->
+<!--                                >-->
+                                    <input
+                                            ref="el"
+                                           class="input form-control"
+                                           name="recipient.phone"
+                                    >
+
+<!--                                    <div class="invalid-feedback">-->
+<!--                                        <ErrorMessage name="recipient.phone" />-->
+<!--                                    </div>-->
+<!--                                </Field>-->
                             </div>
                         </div>
 
-
-
+<!--RECIPIENT CITY-->
                         <div class="form-group">
+                            <Field v-slot="{ field }"
+                                   v-model="form.recipient.city"
+                                   name="recipient.city">
 
-                            <VueMultiselect
-                                    v-model="form.recipient.city"
-                                    id="ajax"
-                                    label="text"
-                                    track-by="id"
-                                    placeholder="Місто"
-                                    open-direction="bottom"
-                                    :options="addressStore.citiesRecipient"
-                                    :searchable="true"
-                                    :internal-search="false"
-                                    :clear-on-select="true"
-                                    :close-on-select="true"
-                                    :options-limit="300"
-                                    :limit="3"
-                                    :max-height="600"
-                                    :show-no-results="false"
-                                    @search-change="searchRecipientCity"
-                                    @select="selectedRecipientCity"
-                            >
-
-
-                            </VueMultiselect>
+                                <VueMultiselect
+                                        v-model="form.recipient.city"
+                                        id="ajax"
+                                        label="text"
+                                        name="recipient.city"
+                                        track-by="id"
+                                        placeholder="Місто"
+                                        open-direction="bottom"
+                                        :class="{ 'is-invalid': errors['recipient.city'] }"
+                                        :options="addressStore.citiesRecipient"
+                                        :searchable="true"
+                                        :internal-search="false"
+                                        :clear-on-select="true"
+                                        :close-on-select="true"
+                                        :options-limit="300"
+                                        :limit="3"
+                                        :max-height="600"
+                                        :show-no-results="false"
+                                        @search-change="searchRecipientCity"
+                                        @select="selectedRecipientCity"
+                                >
+                                </VueMultiselect>
+                                <div class="invalid-feedback">
+                                    <ErrorMessage name="recipient.city" />
+                                </div>
+                            </Field>
                         </div>
 
+<!-- RECIPIENT STREET                       -->
                         <div class="form-group">
+                            <Field v-slot="{ field }"
+                                   v-model="form.recipient.street"
+                                   name="recipient.street">
 
-                            <VueMultiselect
-                                    v-model="form.recipient.street"
-                                    id="ajax"
-                                    label="text"
-                                    track-by="id"
-                                    placeholder="Вулиця"
-                                    open-direction="bottom"
-                                    :options="addressStore.streets"
-                                    :searchable="true"
-                                    :internal-search="false"
-                                    :clear-on-select="true"
-                                    :close-on-select="true"
-                                    :options-limit="300"
-                                    :limit="3"
-                                    :max-height="600"
-                                    :show-no-results="false"
-                            >
+                                <VueMultiselect
+                                        v-model="form.recipient.street"
+                                        id="ajax"
+                                        label="text"
+                                        track-by="id"
+                                        placeholder="Вулиця"
+                                        open-direction="bottom"
+                                        :class="{ 'is-invalid': errors['recipient.street']}"
+                                        :options="addressStore.streets"
+                                        :searchable="true"
+                                        :internal-search="false"
+                                        :clear-on-select="true"
+                                        :close-on-select="true"
+                                        :options-limit="300"
+                                        :limit="3"
+                                        :max-height="600"
+                                        :show-no-results="false"
+                                >
+                                </VueMultiselect>
 
-
-                            </VueMultiselect>
+                                <div class="invalid-feedback">
+                                    <ErrorMessage name="recipient.street"/>
+                                </div>
+                            </Field>
                         </div>
 
 
                         <div class="row">
-                            <div class="col-md-6 form-group" >
-                                <input class="input" type="text"
-                                       v-model="form.recipient.house"
-                                       name="house" placeholder="Номер будинку">
+
+                            <div class="col-md-6 form-group">
+                                <Field
+                                        class="input form-control"
+                                        type="text"
+                                        :class="{ 'is-invalid': errors['recipient.house']}"
+                                        v-model="form.recipient.house"
+                                        name="recipient.house"
+                                        placeholder="Номер будинку"/>
+
+                                <div class="invalid-feedback">
+                                    <ErrorMessage name="recipient.house"/>
+                                </div>
                             </div>
+
                             <div class="col-md-6 form-group" >
-                                <input class="input" type="text"
-                                       v-model="form.recipient.flat"
-                                       name="flat" placeholder="Номер квартири">
+                                <Field
+                                        class="input form-control"
+                                        :class="{ 'is-invalid': errors['recipient.flat']}"
+                                        type="text"
+                                        v-model="form.recipient.flat"
+                                        name="recipient.flat"
+                                        placeholder="Номер квартири"/>
+
+                                <div class="invalid-feedback">
+                                    <ErrorMessage name="recipient.flat"/>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -143,13 +231,13 @@
                                     <i class="icon-NP-on"></i>
                                     <span>Нова почта</span>
 
-                                    <input
+                                    <Field
                                             style="display: none"
-                                            name="address_delivery_type"
+                                            name="address_delivery.delivery_type"
                                             type="radio"
                                             v-model="form.address_delivery.delivery_type"
                                             id="dp-nova_poshta"
-                                            value="nova_poshta">
+                                            value="nova_poshta"/>
 
                                 </label>
                             </li>
@@ -202,6 +290,9 @@
                                 </label>
                             </li>
                         </ul>
+
+                        <ErrorMessage as="div" class="invalid-feedback" style="display: block" name="address_delivery.delivery_type"/>
+
 
                         <div
                                 v-if:="['nova_poshta','meest_point','meest_apt'].includes(form.address_delivery.delivery_type)"
@@ -268,6 +359,7 @@
                         <textarea class="input" placeholder="Примітки до замовлення"></textarea>
                     </div>
                     <!-- /Order notes -->
+                    </Form>
                 </div>
 
                 <!-- Order Details -->
@@ -309,7 +401,6 @@
                                                     <span>+</span>
                                                 </a>
                                             </div>
-
                                     </div>
                                 </div>
                                 <div>{{ product.price * product.quantity }} грн</div>
@@ -332,7 +423,7 @@
                             I've read and accept the <a href="#">terms & conditions</a>
                         </label>
                     </div>
-                    <button :disabled="!isAgree"  v-on:click="placeOrder"  style="width: 100%"  class="primary-btn order-submit">Place order</button>
+                    <button :disabled="!isAgree"  form="form-basket"  type="submit" style="width: 100%"  class="primary-btn order-submit">Place order</button>
 
 
                 </div>
@@ -349,37 +440,3 @@
     <!-- /SECTION -->
 
 
-    <div id="newsletter" class="section">
-        <!-- container -->
-        <div class="container">
-            <!-- row -->
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="newsletter">
-                        <p>Sign Up for the <strong>NEWSLETTER</strong></p>
-                        <form>
-                            <input class="input" type="email" placeholder="Enter Your Email">
-                            <button class="newsletter-btn"><i class="fa fa-envelope"></i> Subscribe</button>
-                        </form>
-                        <ul class="newsletter-follow">
-                            <li>
-                                <a href="#"><i class="fa fa-facebook"></i></a>
-                            </li>
-                            <li>
-                                <a href="#"><i class="fa fa-twitter"></i></a>
-                            </li>
-                            <li>
-                                <a href="#"><i class="fa fa-instagram"></i></a>
-                            </li>
-                            <li>
-                                <a href="#"><i class="fa fa-pinterest"></i></a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <!-- /row -->
-        </div>
-        <!-- /container -->
-    </div>
-    <!-- /NEWSLETTER -->

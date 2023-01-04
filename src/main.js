@@ -1,10 +1,11 @@
+// window._ = require('lodash');
+
 import { createApp } from "vue";
 import { createPinia } from "pinia";
 import App from "./App.vue";
 import router from "@/lib/router";
 import "@/style/normalize.css";
 import "@/style/global.scss";
-
 
 import "@/style/lib/bootstrap.min.css";
 import "@/style/lib/nouislider.min.css";
