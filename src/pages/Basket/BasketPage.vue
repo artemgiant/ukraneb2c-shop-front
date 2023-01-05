@@ -80,8 +80,6 @@ const filteredWarehouses = computed(() => {
 const placeOrder = async () => {
   const url = `api/orders/create`;
   await $axios.post(url, form.value).then((res) => {
-    console.log(res);
-    // basketStore.products.value = {};
 
   }).catch(function (error) {
     console.log(error);
@@ -112,15 +110,24 @@ const schema = Yup.object().shape({
 });
 
 
-function onSubmit(values, { resetForm }) {
+async function onSubmit(values, { resetForm }) {
   // display form values on success
   // alert('SUCCESS!! :-)\n\n' + JSON.stringify(values, null, 4));
 
-  for (const [key, product] of Object.entries(basketStore.products)) {
-    basketStore.delFromBasket(product)
-  }
+  const url = `api/orders/create`;
+  await $axios.post(url, form.value).then((res) => {
 
-  resetForm();
+    for (const [key, product] of Object.entries(basketStore.products)) {
+      basketStore.delFromBasket(product)
+    }
+    resetForm();
+
+  }).catch(function (error) {
+    console.log(error);
+    alert(error.message);
+  });
+
+
 }
 
 
@@ -130,8 +137,6 @@ const vPhoneMask = {
   beforeMount: phoneMask
 
 }
-
-
 
 
 </script>
