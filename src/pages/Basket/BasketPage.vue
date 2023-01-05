@@ -112,30 +112,15 @@ const schema = Yup.object().shape({
 });
 
 
-function onSubmit(values) {
+function onSubmit(values, { resetForm }) {
   // display form values on success
-  alert('SUCCESS!! :-)\n\n' + JSON.stringify(values, null, 4));
+  // alert('SUCCESS!! :-)\n\n' + JSON.stringify(values, null, 4));
 
-  basketStore.products.value = {};
-  form.value = {
-    recipient: {
-      phone: null,
-      email: null,
-      first_name: null,
-      last_name: null,
-      middle_name: null,
-      city: null,
-      street: null,
-      house: null,
-      flat: null,
-    },
-    address_delivery: {
-      delivery_type: null,
-      city: null,
-      warehouse: null,
-    },
-    products: basketStore.products
-  };
+  for (const [key, product] of Object.entries(basketStore.products)) {
+    basketStore.delFromBasket(product)
+  }
+
+  resetForm();
 }
 
 
