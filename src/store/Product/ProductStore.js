@@ -1,5 +1,5 @@
  import {defineStore} from "pinia"
- import {ref, watch} from "vue";
+ import {ref, watch,computed} from "vue";
  import  {useProductApiStore} from "./ProductApiStore";
 
  export const useProductStore = defineStore('productStore', () => {
@@ -24,6 +24,7 @@
          page.value = 1;
          useProductApiStore().getProducts();
      })
+
 
 
      return {

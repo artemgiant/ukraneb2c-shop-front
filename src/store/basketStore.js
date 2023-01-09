@@ -33,8 +33,26 @@ export const useBasketStore = defineStore('basketStore', ()=>{
     })
 
 
+    const addToBasket = (product) => {
+        const exits =  products.value.find(p => p.id === product.id)
 
+        if (exits) {
+            products.value.find(p => {
+                if(p.id === product.id){
+                    console.log(p)
+                    p.quantity++;
+                }
+            })
+        } else {
+            product.quantity = 1;
+            products.value.push(product)
+        }
+    };
 
-    return {products,
-    delFromBasket,count,sum}
+    return {
+        products,
+        delFromBasket,
+        addToBasket,
+        count,
+        sum}
 })

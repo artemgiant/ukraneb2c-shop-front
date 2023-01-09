@@ -4,10 +4,11 @@ import Index from "@/pages/Index.vue";
 import Example from "@/pages/Example.vue";
 import Store from "@/pages/Store/StorePage.vue"
 import Basket from "@/pages/Basket/BasketPage.vue"
+import Product from "@/pages/Product/ProductPage.vue"
 
 const routes = [
   {
-    component: Index,
+    component: Store,
     path: "/",
     name: "index"
   },
@@ -24,7 +25,12 @@ const routes = [
   {
     component: Basket,
     path: '/basket',
-    name: 'Basket'
+
+  },
+  {
+    component: Product,
+    path: '/product/:id',
+    name: 'Product'
   }
 
 ];

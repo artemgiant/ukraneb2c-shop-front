@@ -104,7 +104,6 @@ const schema = Yup.object().shape({
       .strict(),
   address_delivery: Yup.object().shape({
     delivery_type: Yup.string().required().nullable(),
-
   })
       .strict(),
 });

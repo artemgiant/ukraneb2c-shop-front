@@ -265,7 +265,7 @@
                                 v-for="product in productStore.products"
                                 :key="product.id"
                                 :product="product"
-                                @basket-add-product="addToBasket"
+                                @basket-add-product="basketStore.addToBasket"
                         />
                         <!-- /product -->
 

@@ -20,8 +20,19 @@ export const useProductApiStore = defineStore('productApiStore', () => {
         });
     }
 
+
+    const getProduct = async (id) => {
+
+     return   await  $axios.post(`/api/products`,{id:id}).then((res)=> res.data
+        )  .catch(function (error) {
+            console.log(error);
+            alert(error.message);
+        });
+    }
+
     return {
-        getProducts
+        getProducts,
+        getProduct
     }
 
 })

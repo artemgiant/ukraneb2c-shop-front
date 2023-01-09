@@ -32,23 +32,6 @@ const nextPage = computed(() => {
 })
 
 
-const addToBasket = (product) => {
-  // console.clear()
-  const exits =  basketStore.products.find(p => p.id === product.id)
-  if (exits) {
-    basketStore.products.find(p => {
-      if(p.id === product.id){
-        console.log(p)
-        p.quantity++;
-      }
-    })
-  } else {
-    product.quantity = 1;
-    basketStore.products.push(product)
-  }
-};
-
-
 </script>
 
 
