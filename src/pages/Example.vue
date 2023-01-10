@@ -1,71 +1,57 @@
 <template>
-  <input type="text"  ref="input" v-mask="'+38(0__)-___-__-__'">
-  {{phone}}
+  <swiper
+      :spaceBetween="30"
+      :pagination="pagination"
+      :modules="modules"
+      class="mySwiper"
+  >
+    <swiper-slide><img src="https://swiperjs.com/demos/images/nature-1.jpg"> 1</swiper-slide>
+    <swiper-slide><img src="https://swiperjs.com/demos/images/nature-1.jpg"> 2
+    </swiper-slide >
+    <swiper-slide><img src="https://swiperjs.com/demos/images/nature-1.jpg"> 3</swiper-slide>
+    <swiper-slide><img src="https://swiperjs.com/demos/images/nature-1.jpg"> 4
+    </swiper-slide
+    >
+    <swiper-slide><img src="https://swiperjs.com/demos/images/nature-1.jpg"> 5</swiper-slide>
+    <swiper-slide><img src="https://swiperjs.com/demos/images/nature-1.jpg"> 6
+    </swiper-slide
+    >
+    <swiper-slide><img src="https://swiperjs.com/demos/images/nature-1.jpg"> 7</swiper-slide>
+    <swiper-slide><img src="https://swiperjs.com/demos/images/nature-1.jpg"> 8
+    </swiper-slide
+    >
+    <swiper-slide><img src="https://swiperjs.com/demos/images/nature-1.jpg"> 9</swiper-slide>
+  </swiper>
 </template>
+<script>
+// Import Swiper Vue.js components
+import { Swiper, SwiperSlide } from "swiper/vue";
 
-<script setup>
-import  {ref} from 'vue'
-import {phoneMask} from "@/lib/phone-mask";
+// Import Swiper styles
+import "swiper/css";
 
-const phone = ref('');
+import "swiper/css/pagination";
 
-const vMask = {
-  // beforeMount: (el) => focus
-  mounted: phoneMask
+import "./style.css";
 
-}
+// import required modules
+import { Pagination } from "swiper";
+
+export default {
+  components: {
+    Swiper,
+    SwiperSlide,
+  },
+  setup() {
+    return {
+      pagination: {
+        clickable: true,
+        renderBullet: function (index, className) {
+          return '<span class="' + className + '">' + (index + 1) + "</span>";
+        },
+      },
+      modules: [Pagination],
+    };
+  },
+};
 </script>
-
-<style scoped>
-
-body {
-  margin: 0;
-}
-
-* {
-  box-sizing: border-box;
-}
-
-#app {
-  height: 100vh;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-family: 'Inter', sans-serif;
-  background: #87ccad;
-}
-
-input {
-  height: 46px;
-  font-size: 16px;
-  padding: 0 16px;
-  font-family: 'Inter', sans-serif;
-  border: none;
-  font-weight: 500;
-  outline: none;
-  width: 230px;
-  border-radius: 2px;
-}
-
-button {
-  margin-top: 12px;
-  height: 46px;
-  border-radius: 2px;
-  padding: 0 24px;
-  width: 230px;
-  border: none;
-  background: #000;
-  color: #fff;
-  text-transform: uppercase;
-  font-family: 'Inter', sans-serif;
-  cursor: pointer;
-  outline: none;
-  transition: 0.2s;
-}
-
-button:hover {
-  background: #222;
-}
-</style>
