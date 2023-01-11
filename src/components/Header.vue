@@ -26,9 +26,9 @@
           <!-- LOGO -->
           <div class="col-md-3">
             <div class="header-logo">
-              <a href="#" class="logo">
+              <router-link class="logo" to="/">
                 <img src="/img/logo.png" alt="">
-              </a>
+              </router-link>
             </div>
           </div>
           <!-- /LOGO -->
@@ -90,9 +90,8 @@
                     <h5>SUBTOTAL: ₴ {{basketStore.sum}}.00</h5>
                   </div>
                   <div class="cart-btns">
-<!--                    <a href="#">View Cart</a>-->
                     <router-link to="/basket">View Cart</router-link>
-                    <a href="#">Checkout  <i class="fa fa-arrow-circle-right"></i></a>
+                    <router-link to="/basket">Checkout  <i class="fa fa-arrow-circle-right"></i></router-link>
                   </div>
                 </div>
               </div>

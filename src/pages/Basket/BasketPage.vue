@@ -5,6 +5,7 @@
 <script setup>
 import {computed, ref} from 'vue'
 import $axios from "@/lib/axios";
+import { useRouter } from 'vue-router'
 
 import * as Yup from 'yup';
 import {phoneMask} from "@/lib/phone-mask";
@@ -21,8 +22,9 @@ import {useAddressStore} from "@/store/Address/AddressStore";
 const basketStore = useBasketStore();
 const addressApiStore = useAddressApiStore();
 const addressStore = useAddressStore();
+const router = useRouter();
 
-const isAgree = ref(false);
+const isAgree = ref(true);
 
 const form = ref({
   recipient:{
@@ -77,16 +79,6 @@ const filteredWarehouses = computed(() => {
   return addressStore.warehouses;
 })
 
-const placeOrder = async () => {
-  const url = `api/orders/create`;
-  await $axios.post(url, form.value).then((res) => {
-
-  }).catch(function (error) {
-    console.log(error);
-    alert(error.message);
-  });
-}
-
 
 const schema = Yup.object().shape({
   recipient:
@@ -120,6 +112,8 @@ async function onSubmit(values, { resetForm }) {
       basketStore.delFromBasket(product)
     }
     resetForm();
+
+    router.push({name:'delivery-info'})
 
   }).catch(function (error) {
     console.log(error);

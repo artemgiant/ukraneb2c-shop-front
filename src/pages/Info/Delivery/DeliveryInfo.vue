@@ -1,4 +1,4 @@
-<template src="DeliveryInfo.html">
+<template src="./DeliveryInfo.html">
 </template>
 
 <script>

@@ -5,12 +5,18 @@ import Example from "@/pages/Example.vue";
 import Store from "@/pages/Store/StorePage.vue"
 import Basket from "@/pages/Basket/BasketPage.vue"
 import Product from "@/pages/Product/ProductPage.vue"
+import DeliveryInfo from "@/pages/Info/Delivery/DeliveryInfo.vue"
 
 const routes = [
   {
     component: Store,
     path: "/",
     name: "index"
+  },
+  {
+    component: DeliveryInfo,
+    path: "/info/delivery",
+    name: "delivery-info"
   },
   {
     component: Example,
