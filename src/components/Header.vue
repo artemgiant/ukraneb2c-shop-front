@@ -34,7 +34,7 @@
           <!-- /LOGO -->
 
           <!-- SEARCH BAR -->
-          <div class="col-md-6">
+          <div class="col-md-6" style="opacity: 0.5;cursor: not-allowed!important;pointer-events: none">
             <div class="header-search">
               <form>
                 <select class="input-select">

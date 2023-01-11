@@ -10,12 +10,14 @@ import {useProductApiStore} from "@/store/Product/ProductApiStore"
 import {useProductStore} from "@/store/Product/ProductStore"
 import {useBasketStore} from "@/store/basketStore"
 
+
 // Components
 import Card from "@/components/Card.vue";
 
 const productApiStore = useProductApiStore();
 const productStore = useProductStore();
 const basketStore = useBasketStore();
+
 
 productApiStore.getProducts()
 
@@ -35,45 +37,3 @@ const nextPage = computed(() => {
 </script>
 
 
-<!--<script >-->
-
-<!--import {useProductApiStore} from "@/store/Product/ProductApiStore"-->
-<!--import {useProductStoPiniare} from "@/store/Product/ProductStore"-->
-
-<!--// Components-->
-<!--import Card from "@/components/Card.vue";-->
-
-<!--export default {-->
-<!--  components: {Card},-->
-<!--  data(){-->
-<!--    return {-->
-<!--      products: {},-->
-<!--      totalCount:0,-->
-<!--      page:1,-->
-<!--      length:10,-->
-<!--    }-->
-<!--  },-->
-<!--  mounted() {-->
-<!--    useProductApiStore().getProducts()-->
-
-<!--    const productStore = useProductStore();-->
-<!--     this.products =  useProductStore().products;-->
-<!--     console.log( useProductStore().total);-->
-<!--     this.totalCount =  useProductStore().total;-->
-<!--  },-->
-
-<!--  computed: {-->
-<!--    startIndex() {-->
-<!--      return (this.page - 1) * this.length;-->
-<!--    },-->
-<!--    endIndex() {-->
-<!--      return  this.page * this.length;-->
-<!--    },-->
-<!--  },-->
-<!--  methods:{-->
-<!--    test(){-->
-
-<!--    }-->
-<!--  }-->
-<!--}-->
-<!--</script>-->

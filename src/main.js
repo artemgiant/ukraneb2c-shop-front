@@ -4,6 +4,11 @@ import { createApp } from "vue";
 import { createPinia } from "pinia";
 import App from "./App.vue";
 import router from "@/lib/router";
+import Toast from "vue-toastification";
+
+// Import the CSS or use your own!
+import "vue-toastification/dist/index.css";
+
 import "@/style/normalize.css";
 import "@/style/global.scss";
 
@@ -14,8 +19,13 @@ import "@/style/lib/slick-theme.css";
 import "@/style/lib/font-awesome.min.css";
 import "@/style/style.css";
 
+const optionsToast = {
+    // You can set your default options here
+};
+
 const app = createApp(App)
     .use(router)
+    .use(Toast, optionsToast)
     .use(createPinia())
 ;
 

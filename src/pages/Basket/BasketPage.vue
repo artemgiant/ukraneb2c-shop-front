@@ -126,7 +126,6 @@ async function onSubmit(values, { resetForm }) {
 
 // DIRECTIVES
 const vPhoneMask = {
-  // beforeMount: (el) => focus
   beforeMount: phoneMask
 
 }

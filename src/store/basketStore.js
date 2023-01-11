@@ -1,8 +1,15 @@
 import {defineStore} from "pinia"
 import {ref, watch, computed} from "vue";
+import { useToast } from "vue-toastification";
 
 export const useBasketStore = defineStore('basketStore', ()=>{
     const products = ref([]);
+// Get toast interface
+    const toast = useToast();
+
+
+
+
 
     const productsData = localStorage.getItem("basket:products");
 
@@ -34,6 +41,24 @@ export const useBasketStore = defineStore('basketStore', ()=>{
 
 
     const addToBasket = (product) => {
+
+        // or with options
+        toast.success("Товар додан в корзину!", {
+            position: "bottom-right",
+            timeout: 5000,
+            closeOnClick: true,
+            pauseOnFocusLoss: true,
+            pauseOnHover: true,
+            draggable: true,
+            draggablePercent: 0.6,
+            showCloseButtonOnHover: false,
+            hideProgressBar: false,
+            closeButton: "button",
+            maxToasts: 3,
+            icon: true,
+            rtl: false
+        });
+
         const exits =  products.value.find(p => p.id === product.id)
 
         if (exits) {
@@ -54,5 +79,6 @@ export const useBasketStore = defineStore('basketStore', ()=>{
         delFromBasket,
         addToBasket,
         count,
+        toast,
         sum}
 })
