@@ -10,7 +10,6 @@ export const useBasketStore = defineStore('basketStore', ()=>{
 
 
 
-
     const productsData = localStorage.getItem("basket:products");
 
     if (productsData && Object.keys(JSON.parse(productsData)).length)
