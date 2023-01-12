@@ -79,7 +79,6 @@ const filteredWarehouses = computed(() => {
   return addressStore.warehouses;
 })
 
-
 const schema = Yup.object().shape({
   recipient:
           Yup.object().shape({
@@ -99,7 +98,6 @@ const schema = Yup.object().shape({
   })
       .strict(),
 });
-sss
 
 async function onSubmit(values, { resetForm }) {
   // display form values on success

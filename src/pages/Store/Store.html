@@ -267,7 +267,9 @@
                                 v-for="product in productStore.products"
                                 :key="product.id"
                                 :product="product"
+                                :inWishlist="wishlistStore.has(product)"
                                 @basket-add-product="basketStore.addToBasket"
+                                @wishlist-add-product="wishlistStore.addToWishlist"
                         />
                         <!-- /product -->
 

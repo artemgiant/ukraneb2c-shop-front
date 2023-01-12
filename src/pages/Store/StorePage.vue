@@ -9,17 +9,22 @@ import {computed,watch,ref} from 'vue'
 import {useProductApiStore} from "@/store/Product/ProductApiStore"
 import {useProductStore} from "@/store/Product/ProductStore"
 import {useBasketStore} from "@/store/basketStore"
+import {useWishlistStore} from "@/store/wishlistStore"
 
 
 // Components
 import Card from "@/components/Card.vue";
 
 const productApiStore = useProductApiStore();
-const productStore = useProductStore();
-const basketStore = useBasketStore();
-
+const productStore    = useProductStore();
+const basketStore     = useBasketStore();
+const wishlistStore   = useWishlistStore();
+const products = ref({})
 
 productApiStore.getProducts()
+
+
+
 
 // Pagination
 const startIndex = computed(() => (productStore.page - 1) * productStore.length)

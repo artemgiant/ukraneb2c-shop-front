@@ -54,11 +54,11 @@
             <div class="header-ctn">
               <!-- Wishlist -->
               <div>
-                <a href="#">
+                <router-link to="/wishlist">
                   <i class="fa fa-heart-o"></i>
                   <span>Your Wishlist</span>
-                  <div class="qty">2</div>
-                </a>
+                  <div class="qty">{{wishlistStore.products.length}}</div>
+                </router-link>
               </div>
               <!-- /Wishlist -->
 
@@ -121,7 +121,9 @@
 
 <script setup>
 import {useBasketStore} from "@/store/basketStore"
+import {useWishlistStore} from "@/store/wishlistStore"
 const basketStore = useBasketStore();
+const wishlistStore = useWishlistStore();
 
 </script>
 

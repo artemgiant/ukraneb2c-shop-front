@@ -18,45 +18,57 @@
           <i class="fa fa-star"></i>
         </div>
         <div class="product-btns">
-          <button class="add-to-wishlist"><i class="fa fa-heart-o"></i></button>
-<!--          <button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button>-->
-<!--          <button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>-->
-          <tippy content="Quick view">
-          <router-link class="quick-view" target='_blank' :to="{ name: 'Product',params:{id:product.id}}">
+          <button
+              class="add-to-wishlist"
+              v-tippy="{ content: inWishlist?'Прибрати':'Додати до бажань' }"
+              v-on:click="addInWishlist()">
+            <i class="fa" :class="[inWishlist?'fa-heart':'fa-heart-o']"></i>
+          </button>
+
+          <router-link class="quick-view" v-tippy="{ content: 'Перегляд' }" target='_blank' :to="{ name: 'Product',params:{id:product.id}}">
             <i class="fa fa-eye"></i>
           </router-link>
-          </tippy>
+
         </div>
       </div>
       <div class="add-to-cart">
-        <button class="add-to-cart-btn" v-on:click="add(product)"><i class="fa fa-shopping-cart"></i> add to cart</button>
+        <button class="add-to-cart-btn" v-on:click="addInBasket()"><i class="fa fa-shopping-cart"></i> add to cart</button>
       </div>
     </div>
   </div>
 </template>
 
 <script >
-import { Tippy } from 'vue-tippy'
+import { directive } from 'vue-tippy'
 
 export default {
   name: "Card",
-  components:{'tippy':Tippy},
   props:{
     product: {
       type: Object,
       required: true,
       default: () => {},
     },
+    inWishlist:{
+      type: Boolean,
+      required: false,
+      default: false,
+    }
   },
   emits:[
     'basket-add-product'
   ],
   methods: {
-    add(){
-      console.log(this.product)
+    addInBasket(){
       this.$emit('basket-add-product',this.product)
+    },
+    addInWishlist(){
+      this.$emit('wishlist-add-product',this.product)
     }
-  }
+  },
+  directives: {
+    tippy: directive,
+  },
 }
 </script>
 

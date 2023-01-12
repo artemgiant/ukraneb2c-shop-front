@@ -20,7 +20,19 @@ import "@/style/lib/font-awesome.min.css";
 import "@/style/style.css";
 
 const optionsToast = {
-    // You can set your default options here
+    position: "bottom-right",
+    timeout: 5000,
+    closeOnClick: true,
+    pauseOnFocusLoss: true,
+    pauseOnHover: true,
+    draggable: true,
+    draggablePercent: 0.6,
+    showCloseButtonOnHover: false,
+    hideProgressBar: false,
+    closeButton: "button",
+    maxToasts: 3,
+    icon: true,
+    rtl: false
 };
 
 const app = createApp(App)

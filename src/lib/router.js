@@ -4,6 +4,7 @@ import Index from "@/pages/Index.vue";
 import Example from "@/pages/Example.vue";
 import Store from "@/pages/Store/StorePage.vue"
 import Basket from "@/pages/Basket/BasketPage.vue"
+import Wishlist from "@/pages/Wishlist/WishlistPage.vue"
 import Product from "@/pages/Product/ProductPage.vue"
 import DeliveryInfo from "@/pages/Info/Delivery/DeliveryInfo.vue"
 
@@ -27,6 +28,11 @@ const routes = [
     component: Store,
     path: '/store',
     name: 'Store'
+  },
+  {
+    component: Wishlist,
+    path: '/wishlist',
+    name: 'Wishlist'
   },
   {
     component: Basket,
