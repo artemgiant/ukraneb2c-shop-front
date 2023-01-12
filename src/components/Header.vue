@@ -5,9 +5,9 @@
     <div id="top-header">
       <div class="container">
         <ul class="header-links pull-left">
-          <li><a href="#"><i class="fa fa-phone"></i> +021-95-51-84</a></li>
-          <li><a href="#"><i class="fa fa-envelope-o"></i> email@email.com</a></li>
-          <li><a href="#"><i class="fa fa-map-marker"></i> 1734 Stonecoal Road</a></li>
+          <li><a href="#"><i class="fa fa-phone"></i>+38(067)-978-67-44</a></li>
+          <li><a href="#"><i class="fa fa-envelope-o"></i>artemgiant@gmail.com</a></li>
+          <li><a href="#"><i class="fa fa-map-marker"></i>Житомир вул. Пемоги 4</a></li>
         </ul>
         <ul class="header-links pull-right">
           <li><a href="#"><i class="fa fa-hryvnia">₴</i>UAH</a></li>
@@ -56,7 +56,7 @@
               <div>
                 <router-link to="/wishlist">
                   <i class="fa fa-heart-o"></i>
-                  <span>Your Wishlist</span>
+                  <span>Бажання</span>
                   <div class="qty">{{wishlistStore.products.length}}</div>
                 </router-link>
               </div>
@@ -66,7 +66,7 @@
               <div class="dropdown ">
                 <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
                   <i class="fa fa-shopping-cart"></i>
-                  <span>Your Cart</span>
+                  <span>Ваш кошик</span>
                   <div class="qty">{{basketStore.products.length}}</div>
                 </a>
                 <div class="cart-dropdown">
@@ -86,12 +86,12 @@
 
                   </div>
                   <div class="cart-summary">
-                    <small>{{basketStore.count}} Item(s) selected</small>
-                    <h5>SUBTOTAL: ₴ {{basketStore.sum}}.00</h5>
+                    <small>{{basketStore.count}} Товар(ів) вибрано</small>
+                    <h5>ПІДСУМОК: ₴ {{basketStore.sum}}.00</h5>
                   </div>
                   <div class="cart-btns">
-                    <router-link to="/basket">View Cart</router-link>
-                    <router-link to="/basket">Checkout  <i class="fa fa-arrow-circle-right"></i></router-link>
+<!--                    <router-link style="display: none" to="/basket">Переглянути кошик</router-link>-->
+                    <router-link to="/basket">Переглянути кошик  <i class="fa fa-arrow-circle-right"></i></router-link>
                   </div>
                 </div>
               </div>

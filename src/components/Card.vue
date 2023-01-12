@@ -5,7 +5,7 @@
         <img :src="this.$storageUrl+'/'+product.image_main.name" alt="">
       </div>
       <div class="product-body">
-        <p class="product-category">Category</p>
+        <p class="product-category">Категорія</p>
         <h3 class="product-name"><a href="#">{{product.name}}</a></h3>
         <h4 class="product-price">{{product.price}} грн
           <!--          <del class="product-old-price">$990.00</del>-->
@@ -32,7 +32,7 @@
         </div>
       </div>
       <div class="add-to-cart">
-        <button class="add-to-cart-btn" v-on:click="addInBasket()"><i class="fa fa-shopping-cart"></i> add to cart</button>
+        <button class="add-to-cart-btn" v-on:click="addInBasket()"><i class="fa fa-shopping-cart"></i>Додати в кошик</button>
       </div>
     </div>
   </div>
